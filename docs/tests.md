@@ -1,0 +1,10 @@
+### References
+* [`googleapis` NPM Package](https://www.npmjs.com/package/googleapis)
+* [Testing Frameworks Comparison](https://dev.to/heroku/comparing-the-top-3-javascript-testing-frameworks-2cco)
+* [mock-fs](https://www.npmjs.com/package/mock-fs)
+* [mock-fs Usage](https://www.emgoto.com/nodejs-mock-fs/)
+* [Events](https://www.tutorialspoint.com/nodejs/nodejs_event_emitter.htm)
+* [Supported Video Formats](https://support.google.com/youtube/troubleshooter/2888402?hl=en)
+* [Globs](http://www.jedit.org/users-guide/globs.html)
+* [Check Directory Exists](https://stackoverflow.com/questions/2727167/how-do-you-get-a-list-of-the-names-of-all-files-present-in-a-directory-in-node-j)
+* [ES6 Variable as Key](https://stackoverflow.com/questions/11508463/javascript-set-object-key-by-variable)

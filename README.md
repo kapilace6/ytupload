@@ -16,8 +16,12 @@ Personal Project to learn and adopt [***Test-Driven Development***](https://en.w
 ![TDD](https://miro.medium.com/max/700/1*tZSwCigaTaJdovyWlp5uBQ.jpeg)
 <br><br>
 
+## Documentation
+* [Tests](./Docs/Tests.md)
+
 ### References
 * [`googleapis` NPM Package](https://www.npmjs.com/package/googleapis)
+* [Testing Frameworks Comparison](https://dev.to/heroku/comparing-the-top-3-javascript-testing-frameworks-2cco)
 * [OAuth2.0 Guide](https://developers.google.com/identity/protocols/oauth2)
 * [YouTube Data API Documentation](https://developers.google.com/youtube/v3/docs/videos/insert)
 * [Google API Node.js Client Samples](https://github.com/googleapis/google-api-nodejs-client)
