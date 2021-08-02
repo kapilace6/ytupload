@@ -17,7 +17,7 @@ Personal Project to learn and adopt [***Test-Driven Development***](https://en.w
 <br><br>
 
 ## Documentation
-* [Tests](./Docs/Tests.md)
+* [Tests](./docs/tests.md)
 
 ### References
 * [`googleapis` NPM Package](https://www.npmjs.com/package/googleapis)
