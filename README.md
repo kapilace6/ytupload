@@ -17,10 +17,12 @@ Personal Project to learn and adopt [***Test-Driven Development***](https://en.w
 <br><br>
 
 ## Documentation
+* [Architecture](./docs/architecture.md)
 * [Tests](./docs/tests.md)
 
 ### References
 * [`googleapis` NPM Package](https://www.npmjs.com/package/googleapis)
+* [`chokidar` NPM Package](https://www.npmjs.com/package/chokidar)
 * [Testing Frameworks Comparison](https://dev.to/heroku/comparing-the-top-3-javascript-testing-frameworks-2cco)
 * [OAuth2.0 Guide](https://developers.google.com/identity/protocols/oauth2)
 * [YouTube Data API Documentation](https://developers.google.com/youtube/v3/docs/videos/insert)
