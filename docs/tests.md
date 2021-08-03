@@ -1,10 +1,11 @@
+## Modules
 ### Directory Watch
 * mock-fs will be used to test the watching of the directory
 * The tests will check whether only the allowed [formats](../formats.json) are being watched
 * The tests will check whether the watch function returns the appropriate tags, based on the parent folder
 
 ### Video Upload
-* mocha & sinon-chai will be used to test the upload of files
+* [mocha](https://mochajs.org/) & [sinon](https://sinonjs.org/) will be used to test the upload of files
 * Proper error handling of various responses will be mocked
 * An integration test will be added to test the entire workflow, as described in the [working documentation](../working.md)
 
