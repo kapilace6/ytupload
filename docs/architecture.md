@@ -1,14 +1,14 @@
 # Architecture
 
 The app follows the **Event Pipeline Pattern**
-<!-- ![EPP](../message.svg) -->
+![EPP](./diagram.svg)
 
 1. Source of generated files would be one of the following:
     * From Nvidia ShadowPlay
     * Copied files from a directory outside of the watch space
-1. `chokidar` is used to **watch** the directory space. Returns path of generated file, along with tags for the video
+1. [`chokidar`](https://www.npmjs.com/package/chokidar) is used to **watch** the directory space. Returns path of generated file, along with tags for the video
     > Tags are sourced from the parent directory of generated file
-1. `googleapis` is used to **upload** the video to the authenticated user's channel
+1. [`googleapis`](https://www.npmjs.com/package/googleapis) is used to **upload** the video to the authenticated user's channel
 1. On Video Upload Completion / Finished Processing (TBD), generated file is then **deleted** from source
 
 <br>
