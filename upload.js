@@ -36,6 +36,7 @@ async function runSample(fileName) {
       'https://www.googleapis.com/auth/youtube',
     ],
   });
+  google.options({auth});
 
   const fileSize = fs.statSync(fileName).size;
   const res = await youtube.videos.insert(
