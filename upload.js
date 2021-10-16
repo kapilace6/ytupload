@@ -26,16 +26,22 @@ const {authenticate} = require('@google-cloud/local-auth');
 // initialize the Youtube API library
 const youtube = google.youtube('v3');
 
+var client_tokens = require('./client_tokens.json')
+
 // very basic example of uploading a video to youtube
 async function runSample(fileName) {
   // Obtain user credentials to use for the request
-  const auth = await authenticate({
+	const auth = await authenticate({
     keyfilePath: path.join(__dirname, './client_secrets.json'),
     scopes: [
       'https://www.googleapis.com/auth/youtube.upload',
       'https://www.googleapis.com/auth/youtube',
     ],
-  });
+  // }, 0);
+
+  }, client_tokens);
+
+  // console.log({auth})
   google.options({auth});
 
   const fileSize = fs.statSync(fileName).size;
@@ -66,7 +72,8 @@ async function runSample(fileName) {
         process.stdout.write(`${Math.round(progress)}% complete`);
       },
     }
-  );
+  ).catch(error => { console.log(error) });
+
   console.log('\n\n');
   console.log(res.data);
   return res.data;

@@ -8,6 +8,7 @@ The app follows the **Event Pipeline Pattern**
     * Copied files from a directory outside of the watch space
 1. [`chokidar`](https://www.npmjs.com/package/chokidar) is used to **watch** the directory space. Returns path of generated file, along with tags for the video
     > Tags are sourced from the parent directory of generated file
+1. [Node.js quickstart](https://developers.google.com/people/quickstart/nodejs) for OAuth authentication.
 1. [`googleapis`](https://www.npmjs.com/package/googleapis) is used to **upload** the video to the authenticated user's channel
 1. On Video Upload Completion / Finished Processing (TBD), generated file is then **deleted** from source
 

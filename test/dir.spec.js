@@ -7,76 +7,61 @@ var expect = chai.expect
 
 describe('watch directory for videos generated', () => {
 
-    var watchPath = '/st/mnnss';
+    var testDir = './testfs';
+    var watcher;
 
-    beforeEach(() => {mockfs({[watchPath]: {}})})
-    afterEach(mockfs.restore)
+    //TODO: Mock Filesystem
+    // beforeEach(() => {mockfs({[testDir]: { 'mnss.tt': 'I Am Here' } })})
+    // afterEach(mockfs.restore)
+
+    beforeEach(() => {
+        fs.mkdirSync(testDir)
+        watcher = watchDir(testDir)
+    });
+    afterEach(() => {
+        if(fs.existsSync(testDir))
+            fs.rmdirSync(testDir, { recursive: true })
+
+        watcher.close()
+    })
 
     it('should emit when .mp4 is created', () => {
+        //Should only run after when watcher is ready
+
         var dirSpy = sinon.spy()
+        watcher.on('add', dirSpy)
 
-        // console.log('OOO')
-        // var ks = fs.readdirSync(watchPath)
-        // console.log(ks)
-
-        var wd = watchDir(watchPath)
-
-        wd.on('add', dirSpy)
-        mockfs({
-            [watchPath]: {
-                '124125.mp4': '# Hello world!',
-            }
-        });
-
-        // console.log('OO1')
-        // ks = fs.readdirSync(watchPath)
-        // console.log(ks)
+        fs.writeFileSync(`${testDir}/testx.mp4`, 'Did this run?')
         
         expect(dirSpy.calledOnce).to.be.true;
+
+        //TODO: Should add to pendingQueue
     })
 
     it('should emit when .mov is created', () => {
         var dirSpy = sinon.spy()
-
-        // console.log('OOO')
-        // var ks = fs.readdirSync(watchPath)
-        // console.log(ks)
-
-        var wd = watchDir(watchPath)
+        var wd = watchDir(testDir)
 
         wd.on('add', dirSpy)
         mockfs({
-            [watchPath]: {
+            [testDir]: {
                 '124125.mov': '# Hello world!',
             }
         });
-
-        // console.log('OO1')
-        // ks = fs.readdirSync(watchPath)
-        // console.log(ks)
         
         expect(dirSpy.calledOnce).to.be.true;
     })
 
     it('should emit when .avi is created', () => {
         var dirSpy = sinon.spy()
-
-        // console.log('OOO')
-        // var ks = fs.readdirSync(watchPath)
-        // console.log(ks)
-
-        var wd = watchDir(watchPath)
+        var wd = watchDir(testDir)
 
         wd.on('add', dirSpy)
         mockfs({
-            [watchPath]: {
+            [testDir]: {
                 '124125.avi': '# Hello world!',
             }
         });
-
-        // console.log('OO1')
-        // ks = fs.readdirSync(watchPath)
-        // console.log(ks)
         
         expect(dirSpy.calledOnce).to.be.true;
     })
@@ -85,20 +70,20 @@ describe('watch directory for videos generated', () => {
         var dirSpy = sinon.spy()
 
         // console.log('OOO')
-        // var ks = fs.readdirSync(watchPath)
+        // var ks = fs.readdirSync(testDir)
         // console.log(ks)
 
-        var wd = watchDir(watchPath)
+        var wd = watchDir(testDir)
 
         wd.on('add', dirSpy)
         mockfs({
-            [watchPath]: {
+            [testDir]: {
                 '124125.txt': '# Hello world!',
             }
         });
 
         // console.log('OO1')
-        // ks = fs.readdirSync(watchPath)
+        // ks = fs.readdirSync(testDir)
         // console.log(ks)
         
         expect(dirSpy.calledOnce).to.be.false;
