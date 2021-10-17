@@ -1,41 +1,46 @@
-var sinon = require('sinon')
-var chai = require('chai')
-var mockfs = require('mock-fs')
-var fs = require('fs')
-const watchDir = require('../dir')
-var expect = chai.expect
+var sinon = require('sinon');
+var chai = require('chai');
+var mockfs = require('mock-fs');
+var fs = require('fs');
+const watchDir = require('../dir');
+var expect = chai.expect;
 
 describe('watch directory for videos generated', () => {
 
     var testDir = './testfs';
-    var watcher;
+    var wD;
 
     //TODO: Mock Filesystem
     // beforeEach(() => {mockfs({[testDir]: { 'mnss.tt': 'I Am Here' } })})
     // afterEach(mockfs.restore)
 
-    beforeEach(() => {
-        fs.mkdirSync(testDir)
-        watcher = watchDir(testDir)
+    beforeEach(async () => {
+        if(!fs.existsSync(testDir))
+            fs.mkdirSync(testDir);
+
+        wD = new watchDir(testDir);
+
+        await new Promise(function (resolve) {
+            wD.watcher.on('ready', () => resolve());
+        });
     });
     afterEach(() => {
         if(fs.existsSync(testDir))
-            fs.rmdirSync(testDir, { recursive: true })
+            fs.rmdirSync(testDir, { recursive: true });
 
-        watcher.close()
+        wD.watcher.close();
     })
 
-    it('should emit when .mp4 is created', () => {
-        //Should only run after when watcher is ready
+    it.only('should emit when .mp4 is created', (done) => {
+        // Should only run after when watcher is ready
+        var dirSpy = sinon.spy();
+        wD.watcher.on('add', dirSpy);
 
-        var dirSpy = sinon.spy()
-        watcher.on('add', dirSpy)
-
-        fs.writeFileSync(`${testDir}/testx.mp4`, 'Did this run?')
+        fs.writeFileSync(`${testDir}/testx.mp4`, 'Did this run?');
         
         expect(dirSpy.calledOnce).to.be.true;
 
-        //TODO: Should add to pendingQueue
+        expect(wD.watcher.pendingQueue).to.have.length(1);
     })
 
     it('should emit when .mov is created', () => {
