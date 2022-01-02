@@ -18,31 +18,18 @@
  */
 
 const fs = require('fs');
-const path = require('path');
 const readline = require('readline');
 const {google} = require('googleapis');
-const {authenticate} = require('@google-cloud/local-auth');
+const authenticate = require('./authenticate');
 
 // initialize the Youtube API library
 const youtube = google.youtube('v3');
 
-var client_tokens = require('./client_tokens.json')
-
 // very basic example of uploading a video to youtube
 async function runSample(fileName) {
   // Obtain user credentials to use for the request
-	const auth = await authenticate({
-    keyfilePath: path.join(__dirname, './client_secrets.json'),
-    scopes: [
-      'https://www.googleapis.com/auth/youtube.upload',
-      'https://www.googleapis.com/auth/youtube',
-    ],
-  // }, 0);
-
-  }, client_tokens);
-
-  // console.log({auth})
-  google.options({auth});
+	const client = await authenticate();
+  google.options({auth: client});
 
   const fileSize = fs.statSync(fileName).size;
   const res = await youtube.videos.insert(
@@ -85,3 +72,19 @@ if (module === require.main) {
 }
 
 module.exports = runSample;
+
+// Dataflow
+/*
+* 1. Create an event listener for chokidar with the video uploader
+* 2. Video Uploader checks for client secrets.
+* 3. If not available, redirect, authenticate and save client secrets
+* 4. Pick client secrets and upload video for each emitted event
+* 5. Delete file if flag not specified [--no-delete]
+*/
+
+// Enhancements
+/*
+* 1. Flag arg list
+* 2. Specify bandwidth limit [--bandwidth=X(in kBps)]
+* 3. Upload videos in series or parallel [--mode=<parallel,series>]
+*/
